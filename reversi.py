@@ -44,7 +44,7 @@ if __name__ == '__main__':
         print_board(a)
         s = input('> ')
         if not s or s=='q': break
-        if s == 'p':
+        if s != 'p':
             try:
                 x, y = ord(s[0])-97, int(s[1])-1
                 put_piece(a, x+8*y, w)
