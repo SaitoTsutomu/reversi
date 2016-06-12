@@ -53,8 +53,9 @@ if __name__ == '__main__':
         p = best(a, 3-w)
         if p >= 0:
             put_piece(a, p, 3-w)
-    n1, n2 = (a==1).sum(). (a==2).sum()
+    n1, n2 = (a==1).sum(), (a==2).sum()
     print('%d - %d %s' % (n1, n2,
-        'You win' if n1 > n2
-        'You loass' elif n1 < n2 else 'Draw')
+        'You win' if n1 > n2 else
+        'You loass' if n1 < n2 else 'Draw'))
+
 
