@@ -26,6 +26,7 @@ def put_piece(a, p, w, puton=True, chk=True):
     return t
 def best(a, w):
     from math import exp
+    r, b, c = [], a.copy(), 1+exp(-np.count_nonzero(a)/16)
     for i in range(64):
         if b[i] != 0: continue
         t = put_piece(b, i, w, True, False)
