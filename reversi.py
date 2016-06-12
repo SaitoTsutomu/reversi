@@ -26,7 +26,6 @@ def put_piece(a, p, w, puton=True, chk=True):
     return t
 def best(a, w):
     from math import exp
-    r, b, c = [], a.copy(), 1+exp(-(a!=0).sum()/16)
     for i in range(64):
         if b[i] != 0: continue
         t = put_piece(b, i, w, True, False)
@@ -36,17 +35,25 @@ def best(a, w):
         u = sum(b[j]==0 and put_piece(b, j, 3-w, False) > 0 for j in range(64))
         r.append((t-c*u+np.random.rand()*0.5, i))
         b = a.copy()
-    return sorted(r)[-1][1]
+    return sorted(r)[-1][1] if r else -1
 if __name__ == '__main__':
     a = create_board()
     w = 1
-    while True:
+    while np.count_nonzero(a) < 64:
         print_board(a)
         s = input('> ')
         if not s or s=='q': break
-        try:
-            x, y = ord(s[0])-97, int(s[1])-1
-            put_piece(a, x+8*y, w)
-        except:
-            continue
-        put_piece(a, best(a, 3-w), 3-w)
+        if s == 'p':
+            try:
+                x, y = ord(s[0])-97, int(s[1])-1
+                put_piece(a, x+8*y, w)
+            except:
+                continue
+        p = best(a, 3-w)
+        if p >= 0:
+            put_piece(a, p, 3-w)
+    n1, n2 = (a==1).sum(). (a==2).sum()
+    print('%d - %d %s' % (n1, n2,
+        'You win' if n1 > n2
+        'You loass' elif n1 < n2 else 'Draw')
+
